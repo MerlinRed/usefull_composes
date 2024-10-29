@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  clickhouse-server:
+    #     Оставить только таблицу distributed и заменить у нее __table_args__
+    #     __table_args__ = (
+    #        engines.Memory(),
+    #    )
+    image: yandex/clickhouse-server
+    container_name: clickhouse-server
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    volumes:
+      - ch_data:/var/lib/clickhouse
+    environment:
+      CLICKHOUSE_DB: click_db
+      CLICKHOUSE_USER: username
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+
+volumes:
+  ch_data:
+
